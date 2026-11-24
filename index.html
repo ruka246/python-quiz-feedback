@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pythonクイズ企画 意見・アイデア集約サイト</title>
+  <title>プログラミングクイズ企画 意見・アイデア集約サイト</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -22,8 +22,8 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  
-  <!-- ヘッダー（一般閲覧時はログインボタンを出さずスッキリ表示） -->
+
+  <!-- ヘッダー -->
   <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-30">
     <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -31,7 +31,7 @@
           ?
         </div>
         <div>
-          <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">Pythonクイズ企画 意見ボックス</h1>
+          <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">プログラミングクイズ企画 意見ボックス</h1>
           <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくる初心者向けプログラミングクイズ</p>
         </div>
       </div>
@@ -66,75 +66,102 @@
         </div>
       </section>
 
-      <!-- 意見・アイデア投稿フォーム -->
+      <!-- 意見・アイデア投稿フォーム（全項目必須） -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
         <div class="mb-6">
-          <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full mb-2">参加者フォーム</span>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">参加者フォーム</span>
+            <span class="text-xs font-bold text-rose-600">※すべての項目が必須です</span>
+          </div>
           <h2 class="text-xl sm:text-2xl font-black text-slate-800">クイズの意見・リクエストを送る</h2>
           <p class="text-sm text-slate-500 mt-1">
-            「こんなテーマの問題を出してほしい」「難易度はこれくらいがいい」など、自由にお書きください。
+            「こんなテーマの問題を出してほしい」「この形式で出題してほしい」など、自由にお書きください。
           </p>
         </div>
 
         <form id="opinionForm" class="space-y-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- 投稿者名 -->
-            <div>
-              <label for="senderName" class="block text-sm font-bold text-slate-700 mb-1.5">
-                ニックネーム <span class="text-xs font-normal text-slate-400">（空欄なら「匿名参加者」）</span>
-              </label>
-              <input
-                type="text"
-                id="senderName"
-                placeholder="例：パイソン太郎"
-                maxlength="30"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
+          <!-- ニックネーム（必須） -->
+          <div>
+            <label for="senderName" class="block text-sm font-bold text-slate-700 mb-1.5">
+              ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
+            </label>
+            <input
+              type="text"
+              id="senderName"
+              required
+              placeholder="例：パイソン太郎"
+              maxlength="30"
+              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
 
-            <!-- 意見のカテゴリ -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- コードの種類（必須：スクラッチ・パイソン・その他） -->
             <div>
-              <label for="category" class="block text-sm font-bold text-slate-700 mb-1.5">
-                意見の種類 <span class="text-rose-500">*</span>
+              <label for="codeType" class="block text-sm font-bold text-slate-700 mb-1.5">
+                コードの種類 <span class="text-rose-500 text-xs font-bold">（必須）</span>
               </label>
               <select
-                id="category"
+                id="codeType"
                 required
                 class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               >
-                <option value="問題テーマの要望">問題テーマの要望（例：if文、リストなど）</option>
-                <option value="難易度・行数の希望">難易度・コード行数の希望</option>
-                <option value="出題形式のアイデア">出題形式のアイデア（4択・複数選択・穴埋めなど）</option>
-                <option value="イベント進行・感想">イベント進行への意見・感想</option>
+                <option value="" disabled selected>選択してください</option>
+                <option value="パイソン">パイソン（Python）</option>
+                <option value="スクラッチ">スクラッチ（Scratch）</option>
                 <option value="その他">その他</option>
+              </select>
+            </div>
+
+            <!-- 問題の種類（必須：すべての問題の種類） -->
+            <div>
+              <label for="questionType" class="block text-sm font-bold text-slate-700 mb-1.5">
+                問題の種類 <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <select
+                id="questionType"
+                required
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              >
+                <option value="" disabled selected>選択してください</option>
+                <option value="クイズ（4択）">クイズ（4択）</option>
+                <option value="〇×クイズ（True or False）">〇×クイズ（True or False）</option>
+                <option value="複数選択（複数正解）">複数選択（複数正解）</option>
+                <option value="自由記述・穴埋め（短答式）">自由記述・穴埋め（短答式）</option>
+                <option value="並び替え（パズル）">並び替え（パズル）</option>
+                <option value="スライダー（数値予想）">スライダー（数値予想）</option>
+                <option value="投票・アンケート">投票・アンケート</option>
+                <option value="すべての問題の種類">すべての問題の種類（どれでもOK）</option>
               </select>
             </div>
           </div>
 
-          <!-- 希望するレベル感 -->
+          <!-- 希望するレベル感（必須） -->
           <div>
-            <label class="block text-sm font-bold text-slate-700 mb-2">想定してほしいレベル感</label>
+            <label class="block text-sm font-bold text-slate-700 mb-2">
+              想定してほしいレベル感 <span class="text-rose-500 text-xs font-bold">（必須）</span>
+            </label>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               <label class="cursor-pointer">
-                <input type="radio" name="level" value="超初心者向け" class="peer sr-only" checked />
+                <input type="radio" name="level" value="超初心者向け" class="peer sr-only" required />
                 <div class="text-center text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl border border-slate-300 text-slate-600 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:border-emerald-600 transition">
                   超初心者向け
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="level" value="初級向け" class="peer sr-only" />
+                <input type="radio" name="level" value="初級向け" class="peer sr-only" required />
                 <div class="text-center text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl border border-slate-300 text-slate-600 peer-checked:bg-sky-500 peer-checked:text-white peer-checked:border-sky-600 transition">
                   初級向け
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="level" value="中級ステップアップ" class="peer sr-only" />
+                <input type="radio" name="level" value="中級ステップアップ" class="peer sr-only" required />
                 <div class="text-center text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl border border-slate-300 text-slate-600 peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-600 transition">
                   中級ステップ
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="level" value="指定なし" class="peer sr-only" />
+                <input type="radio" name="level" value="指定なし" class="peer sr-only" required />
                 <div class="text-center text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl border border-slate-300 text-slate-600 peer-checked:bg-slate-700 peer-checked:text-white peer-checked:border-slate-800 transition">
                   指定なし
                 </div>
@@ -142,10 +169,10 @@
             </div>
           </div>
 
-          <!-- 意見・アイデア本文 -->
+          <!-- 意見・アイデア本文（必須） -->
           <div>
             <label for="opinionText" class="block text-sm font-bold text-slate-700 mb-1.5">
-              意見・アイデアの内容 <span class="text-rose-500">*</span>
+              意見・アイデアの内容 <span class="text-rose-500 text-xs font-bold">（必須）</span>
             </label>
             <textarea
               id="opinionText"
@@ -275,7 +302,7 @@
       </section>
 
       <!-- 絞り込みフィルター -->
-      <section class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+      <section class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
         <div class="flex flex-wrap gap-2">
           <select id="filterStatus" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
             <option value="ALL">すべてのステータス</option>
@@ -284,13 +311,22 @@
             <option value="採用済み">採用済み</option>
             <option value="見送り">見送り</option>
           </select>
-          <select id="filterCategory" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
-            <option value="ALL">すべての種類</option>
-            <option value="問題テーマの要望">問題テーマの要望</option>
-            <option value="難易度・行数の希望">難易度・行数の希望</option>
-            <option value="出題形式のアイデア">出題形式のアイデア</option>
-            <option value="イベント進行・感想">イベント進行・感想</option>
+          <select id="filterCodeType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
+            <option value="ALL">すべてのコード種類</option>
+            <option value="パイソン">パイソン</option>
+            <option value="スクラッチ">スクラッチ</option>
             <option value="その他">その他</option>
+          </select>
+          <select id="filterQuestionType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
+            <option value="ALL">すべての問題種類</option>
+            <option value="クイズ（4択）">クイズ（4択）</option>
+            <option value="〇×クイズ（True or False）">〇×クイズ（True or False）</option>
+            <option value="複数選択（複数正解）">複数選択（複数正解）</option>
+            <option value="自由記述・穴埋め（短答式）">自由記述・穴埋め（短答式）</option>
+            <option value="並び替え（パズル）">並び替え（パズル）</option>
+            <option value="スライダー（数値予想）">スライダー（数値予想）</option>
+            <option value="投票・アンケート">投票・アンケート</option>
+            <option value="すべての問題の種類">すべての問題の種類</option>
           </select>
         </div>
         <input
@@ -311,7 +347,7 @@
   <!-- フッター（目立たない白い文字リンクのログイン配置） -->
   <footer class="bg-slate-800 text-slate-300 mt-12 py-5 px-4">
     <div class="max-w-5xl mx-auto flex items-center justify-between text-xs">
-      <span>Pythonクイズ企画 意見集約サイト &copy; 2026</span>
+      <span>プログラミングクイズ企画 意見集約サイト &copy; 2026</span>
       <button
         id="footerLoginLink"
         onclick="openLoginModal()"
@@ -323,7 +359,7 @@
   </footer>
 
   <!-- ========================================== -->
-  <!-- シンプルなログインモーダル（ヒント等なし） -->
+  <!-- シンプルなログインモーダル                 -->
   <!-- ========================================== -->
   <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-5">
@@ -372,20 +408,20 @@
 
   <script>
     // ==========================================
-    // 管理者認証設定（ID: k管理者 / 新12桁パスワード）
+    // 管理者認証設定
     // ==========================================
     const ADMIN_ID = "k管理者";
     const ADMIN_PASS = "xR8!wN4@pZ6q";
 
     // ローカルストレージキー
-    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v3";
-    const STORAGE_KEY_NOTICE = "py_quiz_notice_v3";
-    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v3";
+    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v4";
+    const STORAGE_KEY_NOTICE = "py_quiz_notice_v4";
+    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v4";
 
     // デフォルトのお知らせ
     const defaultNotice = {
-      title: "次回のPython初心者向けクイズ大会に向けて意見を募集中です！",
-      body: "いつも参加ありがとうございます！次回のクイズ大会をより楽しく・分かりやすくするために、みなさんのご意見を募集しています。\n・「こんなテーマ（if文、リスト、関数など）の問題が欲しい！」\n・「4択だけじゃなく複数選択や穴埋め問題もやってみたい」\nなど、下のフォームから気軽に送ってください！",
+      title: "次回の初心者向けプログラミングクイズ大会に向けて意見を募集中です！",
+      body: "いつも参加ありがとうございます！次回のクイズ大会をより楽しく・分かりやすくするために、みなさんのご意見を募集しています。\n・「パイソンやスクラッチでこんな問題が欲しい！」\n・「4択だけじゃなく複数選択や穴埋め問題もやってみたい」\nなど、下のフォームから気軽に送ってください！",
       updatedAt: "2026/11/24 更新"
     };
 
@@ -394,7 +430,8 @@
       {
         id: "op-1",
         name: "初心者A",
-        category: "問題テーマの要望",
+        codeType: "パイソン",
+        questionType: "クイズ（4択）",
         level: "超初心者向け",
         text: "実行してもエラーは出ないのに、print() を書き忘れて画面に何も表示されない「初心者がハマる罠」みたいな問題があると盛り上がりそうです！",
         status: "採用済み",
@@ -404,7 +441,8 @@
       {
         id: "op-2",
         name: "パイソン好き",
-        category: "出題形式のアイデア",
+        codeType: "パイソン",
+        questionType: "複数選択（複数正解）",
         level: "初級向け",
         text: "1つのプログラム（10〜15行くらい）を見て、正しい説明をすべて選ぶ「複数選択問題」や、関数名・変数名を当てる「穴埋め問題」をもっと増やしてほしいです！",
         status: "検討中",
@@ -413,13 +451,14 @@
       },
       {
         id: "op-3",
-        name: "匿名参加者",
-        category: "難易度・行数の希望",
-        level: "中級ステップアップ",
-        text: "短いコードだけでなく、25〜30行くらいの少し長めのプログラムを上から順に追いかけて出力結果を当てる問題にも挑戦してみたいです。",
+        name: "スクラッチ民",
+        codeType: "スクラッチ",
+        questionType: "並び替え（パズル）",
+        level: "超初心者向け",
+        text: "スクラッチのブロックを正しい順番に並び替えて、キャラクターをゴールまで動かす問題があると楽しそうです！",
         status: "未確認",
         hostNote: "",
-        createdAt: "2026/11/23 10:40"
+        createdAt: "2026/11/24 11:15"
       }
     ];
 
@@ -528,24 +567,29 @@
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }
 
-    // 意見投稿処理
+    // 意見投稿処理（全項目必須チェック）
     document.getElementById("opinionForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const nameInput = document.getElementById("senderName").value.trim();
-      const category = document.getElementById("category").value;
-      const level = document.querySelector('input[name="level"]:checked').value;
+      const name = document.getElementById("senderName").value.trim();
+      const codeType = document.getElementById("codeType").value;
+      const questionType = document.getElementById("questionType").value;
+      const levelEl = document.querySelector('input[name="level"]:checked');
       const text = document.getElementById("opinionText").value.trim();
 
-      if (!text) return;
+      if (!name || !codeType || !questionType || !levelEl || !text) {
+        alert("すべての必須項目を入力・選択してください。");
+        return;
+      }
 
       const now = new Date();
       const createdAt = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
       const newOpinion = {
         id: "op-" + Date.now(),
-        name: nameInput || "匿名参加者",
-        category,
-        level,
+        name,
+        codeType,
+        questionType,
+        level: levelEl.value,
         text,
         status: "未確認",
         hostNote: "",
@@ -556,7 +600,9 @@
       opinions.unshift(newOpinion);
       saveOpinions(opinions);
 
-      document.getElementById("opinionText").value = "";
+      // フォームをリセット
+      document.getElementById("opinionForm").reset();
+
       const banner = document.getElementById("submitSuccessBanner");
       banner.classList.remove("hidden");
       setTimeout(() => banner.classList.add("hidden"), 5000);
@@ -573,14 +619,16 @@
       document.getElementById("statAdopted").textContent = opinions.filter(o => o.status === "採用済み").length;
 
       const statusFilter = document.getElementById("filterStatus").value;
-      const categoryFilter = document.getElementById("filterCategory").value;
+      const codeTypeFilter = document.getElementById("filterCodeType").value;
+      const questionTypeFilter = document.getElementById("filterQuestionType").value;
       const keyword = document.getElementById("filterKeyword").value.trim().toLowerCase();
 
       const filtered = opinions.filter(op => {
         if (statusFilter !== "ALL" && op.status !== statusFilter) return false;
-        if (categoryFilter !== "ALL" && op.category !== categoryFilter) return false;
+        if (codeTypeFilter !== "ALL" && op.codeType !== codeTypeFilter) return false;
+        if (questionTypeFilter !== "ALL" && op.questionType !== questionTypeFilter) return false;
         if (keyword) {
-          const target = `${op.name} ${op.text} ${op.hostNote} ${op.category}`.toLowerCase();
+          const target = `${op.name} ${op.text} ${op.hostNote} ${op.codeType} ${op.questionType}`.toLowerCase();
           if (!target.includes(keyword)) return false;
         }
         return true;
@@ -603,6 +651,12 @@
         "見送り": "bg-slate-100 text-slate-600 border-slate-200"
       };
 
+      const codeTypeColors = {
+        "パイソン": "bg-sky-100 text-sky-800",
+        "スクラッチ": "bg-orange-100 text-orange-800",
+        "その他": "bg-slate-200 text-slate-700"
+      };
+
       listEl.innerHTML = filtered.map(op => `
         <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -610,15 +664,18 @@
               <span class="text-xs font-bold px-2.5 py-1 rounded-lg border ${statusColors[op.status] || statusColors['未確認']}">
                 ${escapeHtml(op.status)}
               </span>
+              <span class="text-xs font-bold px-2.5 py-1 rounded-lg ${codeTypeColors[op.codeType] || 'bg-slate-100 text-slate-700'}">
+                コード: ${escapeHtml(op.codeType)}
+              </span>
               <span class="text-xs font-bold bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg">
-                ${escapeHtml(op.category)}
+                形式: ${escapeHtml(op.questionType)}
               </span>
               <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">
                 ${escapeHtml(op.level)}
               </span>
             </div>
             <div class="text-xs text-slate-400">
-              投稿者: <span class="font-bold text-slate-600">${escapeHtml(op.name)}</span> ・ ${escapeHtml(op.createdAt)}
+              ニックネーム: <span class="font-bold text-slate-700">${escapeHtml(op.name)}</span> ・ ${escapeHtml(op.createdAt)}
             </div>
           </div>
 
@@ -704,12 +761,13 @@
     function exportCSV() {
       if (!isHostLoggedIn) return;
       const opinions = loadOpinions();
-      const headers = ["ID", "投稿日時", "投稿者", "種類", "レベル感", "ステータス", "意見内容", "メモ"];
+      const headers = ["ID", "投稿日時", "ニックネーム", "コードの種類", "問題の種類", "レベル感", "ステータス", "意見内容", "メモ"];
       const rows = opinions.map(o => [
         o.id,
         o.createdAt,
-        o.name,
-        o.category,
+        `"${(o.name || "").replace(/"/g, '""')}"`,
+        o.codeType,
+        o.questionType,
         o.level,
         o.status,
         `"${(o.text || "").replace(/"/g, '""')}"`,
@@ -720,7 +778,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `python_quiz_opinions_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `quiz_opinions_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
       URL.revokeObjectURL(url);
     }

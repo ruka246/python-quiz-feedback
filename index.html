@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>プログラミングクイズ企画 意見・アイデア集約サイト</title>
+  <title>プログラミングクイズ企画 意見・感想集約サイト</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -66,33 +66,52 @@
         </div>
       </section>
 
-      <!-- 意見・アイデア投稿フォーム（全項目必須） -->
+      <!-- ========================================== -->
+      <!-- フォームA：クイズの問題リクエスト欄          -->
+      <!-- ========================================== -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
         <div class="mb-6">
           <div class="flex items-center gap-2 mb-2">
-            <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">参加者フォーム</span>
+            <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">問題リクエスト</span>
             <span class="text-xs font-bold text-rose-600">※すべての項目が必須です</span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-800">クイズの意見・リクエストを送る</h2>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">クイズの問題リクエストを送る</h2>
           <p class="text-sm text-slate-500 mt-1">
             「こんなテーマの問題を出してほしい」「この形式で出題してほしい」など、自由にお書きください。
           </p>
         </div>
 
         <form id="opinionForm" class="space-y-5">
-          <!-- ニックネーム（必須） -->
-          <div>
-            <label for="senderName" class="block text-sm font-bold text-slate-700 mb-1.5">
-              ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
-            </label>
-            <input
-              type="text"
-              id="senderName"
-              required
-              placeholder="例：パイソン太郎"
-              maxlength="30"
-              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- 先生・生徒番号（必須） -->
+            <div>
+              <label for="reqRoleNumber" class="block text-sm font-bold text-slate-700 mb-1.5">
+                先生の場合は先生と書き生徒の場合は番号を書いてください <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <input
+                type="text"
+                id="reqRoleNumber"
+                required
+                placeholder="例：先生 / 15"
+                maxlength="20"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            <!-- ニックネーム（必須） -->
+            <div>
+              <label for="senderName" class="block text-sm font-bold text-slate-700 mb-1.5">
+                ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <input
+                type="text"
+                id="senderName"
+                required
+                placeholder="例：パイソン太郎"
+                maxlength="30"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -169,10 +188,10 @@
             </div>
           </div>
 
-          <!-- 意見・アイデア本文（必須） -->
+          <!-- リクエスト本文（必須） -->
           <div>
             <label for="opinionText" class="block text-sm font-bold text-slate-700 mb-1.5">
-              意見・アイデアの内容 <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              リクエスト・アイデアの内容 <span class="text-rose-500 text-xs font-bold">（必須）</span>
             </label>
             <textarea
               id="opinionText"
@@ -191,22 +210,132 @@
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
-              <span>この内容で意見を送信する</span>
+              <span>問題リクエストを送信する</span>
             </button>
           </div>
         </form>
 
-        <!-- 送信完了メッセージ -->
+        <!-- リクエスト送信完了メッセージ -->
         <div id="submitSuccessBanner" class="hidden mt-5 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xl p-4 flex items-start gap-3">
           <svg class="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <div>
-            <p class="font-bold text-sm">ご意見を受け付けました！ありがとうございます。</p>
-            <p class="text-xs text-emerald-700 mt-0.5">貴重なご意見として参考にさせていただきます。</p>
+            <p class="font-bold text-sm">問題リクエストを受け付けました！ありがとうございます。</p>
+            <p class="text-xs text-emerald-700 mt-0.5">次回クイズ作成の参考にさせていただきます。</p>
           </div>
         </div>
       </section>
+
+      <!-- ========================================== -->
+      <!-- フォームB：クイズ感想欄（10段階評価付き）  -->
+      <!-- ========================================== -->
+      <section class="bg-white rounded-2xl border-2 border-amber-200 shadow-sm p-5 sm:p-7">
+        <div class="mb-6">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">クイズ感想欄</span>
+            <span class="text-xs font-bold text-rose-600">※すべての項目が必須です</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">今日のクイズの感想を送る</h2>
+          <p class="text-sm text-slate-500 mt-1">
+            クイズに参加したあとの感想や、今日の楽しさ・難しさを10段階で教えてください！
+          </p>
+        </div>
+
+        <form id="feedbackForm" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- 先生・生徒番号（必須） -->
+            <div>
+              <label for="fbRoleNumber" class="block text-sm font-bold text-slate-700 mb-1.5">
+                先生の場合は先生と書き生徒の場合は番号を書いてください <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <input
+                type="text"
+                id="fbRoleNumber"
+                required
+                placeholder="例：先生 / 15"
+                maxlength="20"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              />
+            </div>
+
+            <!-- ニックネーム（必須） -->
+            <div>
+              <label for="fbName" class="block text-sm font-bold text-slate-700 mb-1.5">
+                ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <input
+                type="text"
+                id="fbName"
+                required
+                placeholder="例：パイソン太郎"
+                maxlength="30"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              />
+            </div>
+          </div>
+
+          <!-- 今日の楽しさ 10段階評価（必須） -->
+          <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-4">
+            <div class="flex flex-wrap items-center justify-between gap-1 mb-2.5">
+              <label class="text-sm font-bold text-slate-800">
+                今日の楽しさ（10段階評価） <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <span class="text-xs text-slate-500">1：あまり楽しくなかった 〜 10：すごく楽しかった！</span>
+            </div>
+            <div id="funScaleContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+          </div>
+
+          <!-- 今日の難しさ 10段階評価（必須） -->
+          <div class="bg-sky-50/60 border border-sky-200/80 rounded-2xl p-4">
+            <div class="flex flex-wrap items-center justify-between gap-1 mb-2.5">
+              <label class="text-sm font-bold text-slate-800">
+                今日の難しさ（10段階評価） <span class="text-rose-500 text-xs font-bold">（必須）</span>
+              </label>
+              <span class="text-xs text-slate-500">1：とても簡単だった 〜 10：とても難しかった！</span>
+            </div>
+            <div id="difficultyScaleContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+          </div>
+
+          <!-- 感想入力欄（必須） -->
+          <div>
+            <label for="fbText" class="block text-sm font-bold text-slate-700 mb-1.5">
+              今日のクイズの感想 <span class="text-rose-500 text-xs font-bold">（必須）</span>
+            </label>
+            <textarea
+              id="fbText"
+              rows="4"
+              required
+              placeholder="例：最後の引っ掛け問題にまんまと騙されましたが、解説を聞いて納得しました！とても楽しかったです。"
+              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            ></textarea>
+          </div>
+
+          <div class="pt-1 flex items-center justify-end">
+            <button
+              type="submit"
+              class="pop-btn pop-shadow w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-8 py-3 rounded-xl transition flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>今日の感想を送信する</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- 感想送信完了メッセージ -->
+        <div id="fbSuccessBanner" class="hidden mt-5 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xl p-4 flex items-start gap-3">
+          <svg class="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div>
+            <p class="font-bold text-sm">今日の感想を受け付けました！ありがとうございます。</p>
+            <p class="text-xs text-emerald-700 mt-0.5">みなさんの評価と感想をもとに、さらに良いクイズを作っていきます！</p>
+          </div>
+        </div>
+      </section>
+
     </div>
 
     <!-- ========================================================== -->
@@ -222,45 +351,16 @@
             <h2 class="text-lg sm:text-xl font-black">管理ダッシュボード</h2>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 mt-1">
-            参加者から届いた意見の確認・整理・採用検討、およびトップページのお知らせ編集ができます。
+            集約された「問題リクエスト」と「クイズ感想・10段階評価」の確認、およびお知らせ編集ができます。
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-          <button
-            onclick="exportCSV()"
-            class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white text-xs sm:text-sm font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
-          >
-            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            <span>CSVダウンロード</span>
-          </button>
           <button
             onclick="switchTab('public')"
             class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-bold px-3.5 py-2 rounded-xl transition"
           >
             参加者画面を確認する
           </button>
-        </div>
-      </div>
-
-      <!-- 集計サマリーカード -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-        <div class="bg-white rounded-2xl border border-slate-200 p-4">
-          <p class="text-xs font-bold text-slate-400">集まった意見総数</p>
-          <p id="statTotal" class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">0</p>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-200 p-4">
-          <p class="text-xs font-bold text-rose-500">未確認</p>
-          <p id="statUnread" class="text-2xl sm:text-3xl font-black text-rose-600 mt-1">0</p>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-200 p-4">
-          <p class="text-xs font-bold text-amber-600">検討中</p>
-          <p id="statReviewing" class="text-2xl sm:text-3xl font-black text-amber-600 mt-1">0</p>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-200 p-4">
-          <p class="text-xs font-bold text-emerald-600">採用・クイズ反映済み</p>
-          <p id="statAdopted" class="text-2xl sm:text-3xl font-black text-emerald-600 mt-1">0</p>
         </div>
       </div>
 
@@ -301,45 +401,125 @@
         </div>
       </section>
 
-      <!-- 絞り込みフィルター -->
-      <section class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
-        <div class="flex flex-wrap gap-2">
-          <select id="filterStatus" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
-            <option value="ALL">すべてのステータス</option>
-            <option value="未確認">未確認</option>
-            <option value="検討中">検討中</option>
-            <option value="採用済み">採用済み</option>
-            <option value="見送り">見送り</option>
-          </select>
-          <select id="filterCodeType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
-            <option value="ALL">すべてのコード種類</option>
-            <option value="パイソン">パイソン</option>
-            <option value="スクラッチ">スクラッチ</option>
-            <option value="その他">その他</option>
-          </select>
-          <select id="filterQuestionType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
-            <option value="ALL">すべての問題種類</option>
-            <option value="クイズ（4択）">クイズ（4択）</option>
-            <option value="〇×クイズ（True or False）">〇×クイズ（True or False）</option>
-            <option value="複数選択（複数正解）">複数選択（複数正解）</option>
-            <option value="自由記述・穴埋め（短答式）">自由記述・穴埋め（短答式）</option>
-            <option value="並び替え（パズル）">並び替え（パズル）</option>
-            <option value="スライダー（数値予想）">スライダー（数値予想）</option>
-            <option value="投票・アンケート">投票・アンケート</option>
-            <option value="すべての問題の種類">すべての問題の種類</option>
-          </select>
+      <!-- 管理タブ切り替え（問題リクエスト vs クイズ感想） -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-300 pb-3">
+        <div class="flex gap-2">
+          <button
+            id="tabRequestsBtn"
+            onclick="setAdminSubTab('requests')"
+            class="px-4 py-2.5 rounded-xl text-sm font-black transition bg-indigo-600 text-white shadow-xs"
+          >
+            問題リクエスト一覧 (<span id="tabReqCount">0</span>)
+          </button>
+          <button
+            id="tabFeedbacksBtn"
+            onclick="setAdminSubTab('feedbacks')"
+            class="px-4 py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-600 border border-slate-300 hover:bg-slate-50"
+          >
+            クイズ感想・評価一覧 (<span id="tabFbCount">0</span>)
+          </button>
         </div>
-        <input
-          type="text"
-          id="filterKeyword"
-          oninput="renderOpinions()"
-          placeholder="キーワードで検索..."
-          class="rounded-xl border border-slate-300 px-3.5 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-      </section>
 
-      <!-- 集約された意見カード一覧 -->
-      <section id="opinionList" class="space-y-4"></section>
+        <button
+          id="csvExportBtn"
+          onclick="handleExportCSV()"
+          class="bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5"
+        >
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>CSVダウンロード</span>
+        </button>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 管理サブビュー1：問題リクエスト一覧        -->
+      <!-- ========================================== -->
+      <div id="adminRequestsSection" class="space-y-5">
+        <!-- 集計サマリーカード -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4">
+            <p class="text-xs font-bold text-slate-400">リクエスト総数</p>
+            <p id="statTotal" class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4">
+            <p class="text-xs font-bold text-rose-500">未確認</p>
+            <p id="statUnread" class="text-2xl sm:text-3xl font-black text-rose-600 mt-1">0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4">
+            <p class="text-xs font-bold text-amber-600">検討中</p>
+            <p id="statReviewing" class="text-2xl sm:text-3xl font-black text-amber-600 mt-1">0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4">
+            <p class="text-xs font-bold text-emerald-600">採用・クイズ反映済み</p>
+            <p id="statAdopted" class="text-2xl sm:text-3xl font-black text-emerald-600 mt-1">0</p>
+          </div>
+        </div>
+
+        <!-- 絞り込みフィルター -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            <select id="filterStatus" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
+              <option value="ALL">すべてのステータス</option>
+              <option value="未確認">未確認</option>
+              <option value="検討中">検討中</option>
+              <option value="採用済み">採用済み</option>
+              <option value="見送り">見送り</option>
+            </select>
+            <select id="filterCodeType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
+              <option value="ALL">すべてのコード種類</option>
+              <option value="パイソン">パイソン</option>
+              <option value="スクラッチ">スクラッチ</option>
+              <option value="その他">その他</option>
+            </select>
+            <select id="filterQuestionType" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
+              <option value="ALL">すべての問題種類</option>
+              <option value="クイズ（4択）">クイズ（4択）</option>
+              <option value="〇×クイズ（True or False）">〇×クイズ（True or False）</option>
+              <option value="複数選択（複数正解）">複数選択（複数正解）</option>
+              <option value="自由記述・穴埋め（短答式）">自由記述・穴埋め（短答式）</option>
+              <option value="並び替え（パズル）">並び替え（パズル）</option>
+              <option value="スライダー（数値予想）">スライダー（数値予想）</option>
+              <option value="投票・アンケート">投票・アンケート</option>
+              <option value="すべての問題の種類">すべての問題の種類</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            id="filterKeyword"
+            oninput="renderOpinions()"
+            placeholder="番号・ニックネーム・本文で検索..."
+            class="rounded-xl border border-slate-300 px-3.5 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- 集約された問題リクエストカード一覧 -->
+        <div id="opinionList" class="space-y-4"></div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 管理サブビュー2：クイズ感想・10段階評価一覧 -->
+      <!-- ========================================== -->
+      <div id="adminFeedbacksSection" class="hidden space-y-5">
+        <!-- 感想サマリー（平均スコア表示） -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4">
+            <p class="text-xs font-bold text-slate-400">感想の回答数</p>
+            <p id="fbStatTotal" class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">0</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-amber-200 p-4">
+            <p class="text-xs font-bold text-amber-600">今日の楽しさ（平均 / 10点満点）</p>
+            <p id="fbAvgFun" class="text-2xl sm:text-3xl font-black text-amber-500 mt-1">-</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-sky-200 p-4">
+            <p class="text-xs font-bold text-sky-600">今日の難しさ（平均 / 10点満点）</p>
+            <p id="fbAvgDiff" class="text-2xl sm:text-3xl font-black text-sky-600 mt-1">-</p>
+          </div>
+        </div>
+
+        <!-- 感想カード一覧 -->
+        <div id="feedbackList" class="space-y-4"></div>
+      </div>
 
     </div>
   </main>
@@ -414,21 +594,23 @@
     const ADMIN_PASS = "xR8!wN4@pZ6q";
 
     // ローカルストレージキー
-    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v4";
-    const STORAGE_KEY_NOTICE = "py_quiz_notice_v4";
-    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v4";
+    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v5";
+    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v5";
+    const STORAGE_KEY_NOTICE = "py_quiz_notice_v5";
+    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v5";
 
     // デフォルトのお知らせ
     const defaultNotice = {
-      title: "次回の初心者向けプログラミングクイズ大会に向けて意見を募集中です！",
-      body: "いつも参加ありがとうございます！次回のクイズ大会をより楽しく・分かりやすくするために、みなさんのご意見を募集しています。\n・「パイソンやスクラッチでこんな問題が欲しい！」\n・「4択だけじゃなく複数選択や穴埋め問題もやってみたい」\nなど、下のフォームから気軽に送ってください！",
+      title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
+      body: "いつも参加ありがとうございます！\n上のフォームからは次回出してほしい問題のリクエストを、下のフォームからは今日のクイズの感想と10段階評価を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
       updatedAt: "2026/11/24 更新"
     };
 
-    // 初期サンプル意見データ
+    // 初期サンプル問題リクエストデータ
     const defaultOpinions = [
       {
         id: "op-1",
+        roleNumber: "12",
         name: "初心者A",
         codeType: "パイソン",
         questionType: "クイズ（4択）",
@@ -440,17 +622,19 @@
       },
       {
         id: "op-2",
-        name: "パイソン好き",
+        roleNumber: "先生",
+        name: "担当教員",
         codeType: "パイソン",
         questionType: "複数選択（複数正解）",
         level: "初級向け",
-        text: "1つのプログラム（10〜15行くらい）を見て、正しい説明をすべて選ぶ「複数選択問題」や、関数名・変数名を当てる「穴埋め問題」をもっと増やしてほしいです！",
+        text: "1つのプログラム（10〜15行くらい）を見て、正しい説明をすべて選ぶ「複数選択問題」や、変数名を当てる「穴埋め問題」も取り入れてみたいです。",
         status: "検討中",
         hostNote: "RPGのステータス（HPや所持金）をテーマにした15行前後の複数選択問題を作成中。",
         createdAt: "2026/11/22 18:05"
       },
       {
         id: "op-3",
+        roleNumber: "27",
         name: "スクラッチ民",
         codeType: "スクラッチ",
         questionType: "並び替え（パズル）",
@@ -462,9 +646,63 @@
       }
     ];
 
+    // 初期サンプル感想データ
+    const defaultFeedbacks = [
+      {
+        id: "fb-1",
+        roleNumber: "8",
+        name: "パイソン好き",
+        funScore: 9,
+        diffScore: 6,
+        text: "制限時間がある中でコードを頭の中で動かすのがドキドキしてすごく楽しかったです！難易度はちょうど良かったです。",
+        createdAt: "2026/11/24 15:10"
+      },
+      {
+        id: "fb-2",
+        roleNumber: "先生",
+        name: "担当教員",
+        funScore: 10,
+        diffScore: 5,
+        text: "生徒たちが解説を聞いて「なるほど！」と声を上げていて、とても良い復習になっていました。",
+        createdAt: "2026/11/24 15:25"
+      }
+    ];
+
     // 状態管理
     let isHostLoggedIn = sessionStorage.getItem(STORAGE_KEY_AUTH) === "true";
     let currentTab = isHostLoggedIn ? "host" : "public";
+    let adminSubTab = "requests"; // 'requests' or 'feedbacks'
+
+    // 1〜10の評価ラジオボタンを生成
+    function initScaleButtons() {
+      const funContainer = document.getElementById("funScaleContainer");
+      const diffContainer = document.getElementById("difficultyScaleContainer");
+
+      let funHtml = "";
+      let diffHtml = "";
+
+      for (let i = 1; i <= 10; i++) {
+        funHtml += `
+          <label class="cursor-pointer">
+            <input type="radio" name="funScore" value="${i}" class="peer sr-only" required />
+            <div class="text-center text-sm font-black py-2 rounded-xl border border-amber-300 bg-white text-slate-700 peer-checked:bg-amber-500 peer-checked:text-slate-950 peer-checked:border-amber-600 transition select-none">
+              ${i}
+            </div>
+          </label>
+        `;
+        diffHtml += `
+          <label class="cursor-pointer">
+            <input type="radio" name="diffScore" value="${i}" class="peer sr-only" required />
+            <div class="text-center text-sm font-black py-2 rounded-xl border border-sky-300 bg-white text-slate-700 peer-checked:bg-sky-600 peer-checked:text-white peer-checked:border-sky-700 transition select-none">
+              ${i}
+            </div>
+          </label>
+        `;
+      }
+
+      funContainer.innerHTML = funHtml;
+      diffContainer.innerHTML = diffHtml;
+    }
 
     function loadNotice() {
       const saved = localStorage.getItem(STORAGE_KEY_NOTICE);
@@ -480,6 +718,17 @@
 
     function saveOpinions(list) {
       localStorage.setItem(STORAGE_KEY_OPINIONS, JSON.stringify(list));
+    }
+
+    function loadFeedbacks() {
+      const saved = localStorage.getItem(STORAGE_KEY_FEEDBACKS);
+      if (saved) return JSON.parse(saved);
+      localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(defaultFeedbacks));
+      return defaultFeedbacks;
+    }
+
+    function saveFeedbacks(list) {
+      localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(list));
     }
 
     // 画面描画の初期化
@@ -500,14 +749,46 @@
       if (isHostLoggedIn && currentTab === "host") {
         publicView.classList.add("hidden");
         hostView.classList.remove("hidden");
-        renderOpinions();
+        updateAdminCounts();
+        if (adminSubTab === "requests") {
+          renderOpinions();
+        } else {
+          renderFeedbacks();
+        }
       } else {
         publicView.classList.remove("hidden");
         hostView.classList.add("hidden");
       }
     }
 
-    // ヘッダーボタン描画（未ログイン時は何も表示しない）
+    function updateAdminCounts() {
+      document.getElementById("tabReqCount").textContent = loadOpinions().length;
+      document.getElementById("tabFbCount").textContent = loadFeedbacks().length;
+    }
+
+    function setAdminSubTab(tab) {
+      adminSubTab = tab;
+      const reqBtn = document.getElementById("tabRequestsBtn");
+      const fbBtn = document.getElementById("tabFeedbacksBtn");
+      const reqSec = document.getElementById("adminRequestsSection");
+      const fbSec = document.getElementById("adminFeedbacksSection");
+
+      if (tab === "requests") {
+        reqBtn.className = "px-4 py-2.5 rounded-xl text-sm font-black transition bg-indigo-600 text-white shadow-xs";
+        fbBtn.className = "px-4 py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-600 border border-slate-300 hover:bg-slate-50";
+        reqSec.classList.remove("hidden");
+        fbSec.classList.add("hidden");
+        renderOpinions();
+      } else {
+        fbBtn.className = "px-4 py-2.5 rounded-xl text-sm font-black transition bg-amber-500 text-slate-950 shadow-xs";
+        reqBtn.className = "px-4 py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-600 border border-slate-300 hover:bg-slate-50";
+        fbSec.classList.remove("hidden");
+        reqSec.classList.add("hidden");
+        renderFeedbacks();
+      }
+    }
+
+    // ヘッダーボタン描画
     function renderHeader() {
       const container = document.getElementById("headerActions");
       if (isHostLoggedIn) {
@@ -567,16 +848,17 @@
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }
 
-    // 意見投稿処理（全項目必須チェック）
+    // 問題リクエスト投稿処理
     document.getElementById("opinionForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      const roleNumber = document.getElementById("reqRoleNumber").value.trim();
       const name = document.getElementById("senderName").value.trim();
       const codeType = document.getElementById("codeType").value;
       const questionType = document.getElementById("questionType").value;
       const levelEl = document.querySelector('input[name="level"]:checked');
       const text = document.getElementById("opinionText").value.trim();
 
-      if (!name || !codeType || !questionType || !levelEl || !text) {
+      if (!roleNumber || !name || !codeType || !questionType || !levelEl || !text) {
         alert("すべての必須項目を入力・選択してください。");
         return;
       }
@@ -586,6 +868,7 @@
 
       const newOpinion = {
         id: "op-" + Date.now(),
+        roleNumber,
         name,
         codeType,
         questionType,
@@ -600,7 +883,6 @@
       opinions.unshift(newOpinion);
       saveOpinions(opinions);
 
-      // フォームをリセット
       document.getElementById("opinionForm").reset();
 
       const banner = document.getElementById("submitSuccessBanner");
@@ -608,10 +890,49 @@
       setTimeout(() => banner.classList.add("hidden"), 5000);
     });
 
-    // 意見一覧の描画
+    // クイズ感想投稿処理
+    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const roleNumber = document.getElementById("fbRoleNumber").value.trim();
+      const name = document.getElementById("fbName").value.trim();
+      const funEl = document.querySelector('input[name="funScore"]:checked');
+      const diffEl = document.querySelector('input[name="diffScore"]:checked');
+      const text = document.getElementById("fbText").value.trim();
+
+      if (!roleNumber || !name || !funEl || !diffEl || !text) {
+        alert("すべての必須項目を入力・選択してください。");
+        return;
+      }
+
+      const now = new Date();
+      const createdAt = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+      const newFeedback = {
+        id: "fb-" + Date.now(),
+        roleNumber,
+        name,
+        funScore: Number(funEl.value),
+        diffScore: Number(diffEl.value),
+        text,
+        createdAt
+      };
+
+      const feedbacks = loadFeedbacks();
+      feedbacks.unshift(newFeedback);
+      saveFeedbacks(feedbacks);
+
+      document.getElementById("feedbackForm").reset();
+
+      const banner = document.getElementById("fbSuccessBanner");
+      banner.classList.remove("hidden");
+      setTimeout(() => banner.classList.add("hidden"), 5000);
+    });
+
+    // 管理画面：問題リクエスト一覧の描画
     function renderOpinions() {
       if (!isHostLoggedIn) return;
       const opinions = loadOpinions();
+      updateAdminCounts();
 
       document.getElementById("statTotal").textContent = opinions.length;
       document.getElementById("statUnread").textContent = opinions.filter(o => o.status === "未確認").length;
@@ -628,7 +949,7 @@
         if (codeTypeFilter !== "ALL" && op.codeType !== codeTypeFilter) return false;
         if (questionTypeFilter !== "ALL" && op.questionType !== questionTypeFilter) return false;
         if (keyword) {
-          const target = `${op.name} ${op.text} ${op.hostNote} ${op.codeType} ${op.questionType}`.toLowerCase();
+          const target = `${op.roleNumber || ""} ${op.name} ${op.text} ${op.hostNote} ${op.codeType} ${op.questionType}`.toLowerCase();
           if (!target.includes(keyword)) return false;
         }
         return true;
@@ -638,7 +959,7 @@
       if (filtered.length === 0) {
         listEl.innerHTML = `
           <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
-            条件に一致する意見はありません。
+            条件に一致するリクエストはありません。
           </div>
         `;
         return;
@@ -674,8 +995,12 @@
                 ${escapeHtml(op.level)}
               </span>
             </div>
-            <div class="text-xs text-slate-400">
-              ニックネーム: <span class="font-bold text-slate-700">${escapeHtml(op.name)}</span> ・ ${escapeHtml(op.createdAt)}
+            <div class="text-xs text-slate-500 flex flex-wrap items-center gap-2">
+              <span class="bg-slate-800 text-white font-bold px-2 py-0.5 rounded-md">
+                区分/番号: ${escapeHtml(op.roleNumber || "未記入")}
+              </span>
+              <span>ニックネーム: <strong class="text-slate-700">${escapeHtml(op.name)}</strong></span>
+              <span class="text-slate-400">・ ${escapeHtml(op.createdAt)}</span>
             </div>
           </div>
 
@@ -699,7 +1024,7 @@
                 onclick="deleteOpinion('${op.id}')"
                 class="text-xs text-rose-500 hover:text-rose-700 font-bold self-end sm:self-auto"
               >
-                この意見を削除
+                このリクエストを削除
               </button>
             </div>
 
@@ -721,6 +1046,68 @@
                 </button>
               </div>
             </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    // 管理画面：クイズ感想一覧の描画
+    function renderFeedbacks() {
+      if (!isHostLoggedIn) return;
+      const feedbacks = loadFeedbacks();
+      updateAdminCounts();
+
+      document.getElementById("fbStatTotal").textContent = feedbacks.length;
+
+      if (feedbacks.length > 0) {
+        const avgFun = (feedbacks.reduce((sum, f) => sum + Number(f.funScore || 0), 0) / feedbacks.length).toFixed(1);
+        const avgDiff = (feedbacks.reduce((sum, f) => sum + Number(f.diffScore || 0), 0) / feedbacks.length).toFixed(1);
+        document.getElementById("fbAvgFun").textContent = `${avgFun} / 10`;
+        document.getElementById("fbAvgDiff").textContent = `${avgDiff} / 10`;
+      } else {
+        document.getElementById("fbAvgFun").textContent = "-";
+        document.getElementById("fbAvgDiff").textContent = "-";
+      }
+
+      const listEl = document.getElementById("feedbackList");
+      if (feedbacks.length === 0) {
+        listEl.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
+            まだ感想は届いていません。
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = feedbacks.map(fb => `
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs font-black bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-lg">
+                楽しさ: ${escapeHtml(String(fb.funScore))} / 10
+              </span>
+              <span class="text-xs font-black bg-sky-100 text-sky-900 border border-sky-300 px-3 py-1 rounded-lg">
+                難しさ: ${escapeHtml(String(fb.diffScore))} / 10
+              </span>
+            </div>
+            <div class="text-xs text-slate-500 flex flex-wrap items-center gap-2">
+              <span class="bg-slate-800 text-white font-bold px-2 py-0.5 rounded-md">
+                区分/番号: ${escapeHtml(fb.roleNumber || "未記入")}
+              </span>
+              <span>ニックネーム: <strong class="text-slate-700">${escapeHtml(fb.name)}</strong></span>
+              <span class="text-slate-400">・ ${escapeHtml(fb.createdAt)}</span>
+            </div>
+          </div>
+
+          <p class="text-slate-800 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">${escapeHtml(fb.text)}</p>
+
+          <div class="flex justify-end pt-1">
+            <button
+              onclick="deleteFeedback('${fb.id}')"
+              class="text-xs text-rose-500 hover:text-rose-700 font-bold"
+            >
+              この感想を削除
+            </button>
           </div>
         </article>
       `).join("");
@@ -751,34 +1138,62 @@
 
     function deleteOpinion(id) {
       if (!isHostLoggedIn) return;
-      if (!confirm("この意見を完全に削除してもよろしいですか？")) return;
+      if (!confirm("このリクエストを完全に削除してもよろしいですか？")) return;
       const opinions = loadOpinions().filter(o => o.id !== id);
       saveOpinions(opinions);
       renderOpinions();
     }
 
-    // CSV出力
-    function exportCSV() {
+    function deleteFeedback(id) {
       if (!isHostLoggedIn) return;
-      const opinions = loadOpinions();
-      const headers = ["ID", "投稿日時", "ニックネーム", "コードの種類", "問題の種類", "レベル感", "ステータス", "意見内容", "メモ"];
-      const rows = opinions.map(o => [
-        o.id,
-        o.createdAt,
-        `"${(o.name || "").replace(/"/g, '""')}"`,
-        o.codeType,
-        o.questionType,
-        o.level,
-        o.status,
-        `"${(o.text || "").replace(/"/g, '""')}"`,
-        `"${(o.hostNote || "").replace(/"/g, '""')}"`
-      ]);
+      if (!confirm("この感想を完全に削除してもよろしいですか？")) return;
+      const feedbacks = loadFeedbacks().filter(f => f.id !== id);
+      saveFeedbacks(feedbacks);
+      renderFeedbacks();
+    }
+
+    // CSV出力（現在開いているサブタブに応じて出力）
+    function handleExportCSV() {
+      if (!isHostLoggedIn) return;
+      if (adminSubTab === "requests") {
+        const opinions = loadOpinions();
+        const headers = ["ID", "投稿日時", "先生/生徒番号", "ニックネーム", "コードの種類", "問題の種類", "レベル感", "ステータス", "リクエスト内容", "メモ"];
+        const rows = opinions.map(o => [
+          o.id,
+          o.createdAt,
+          `"${(o.roleNumber || "").replace(/"/g, '""')}"`,
+          `"${(o.name || "").replace(/"/g, '""')}"`,
+          o.codeType,
+          o.questionType,
+          o.level,
+          o.status,
+          `"${(o.text || "").replace(/"/g, '""')}"`,
+          `"${(o.hostNote || "").replace(/"/g, '""')}"`
+        ]);
+        downloadCSV(headers, rows, `quiz_requests_${new Date().toISOString().slice(0, 10)}.csv`);
+      } else {
+        const feedbacks = loadFeedbacks();
+        const headers = ["ID", "投稿日時", "先生/生徒番号", "ニックネーム", "楽しさ(10段階)", "難しさ(10段階)", "感想内容"];
+        const rows = feedbacks.map(f => [
+          f.id,
+          f.createdAt,
+          `"${(f.roleNumber || "").replace(/"/g, '""')}"`,
+          `"${(f.name || "").replace(/"/g, '""')}"`,
+          f.funScore,
+          f.diffScore,
+          `"${(f.text || "").replace(/"/g, '""')}"`
+        ]);
+        downloadCSV(headers, rows, `quiz_feedbacks_${new Date().toISOString().slice(0, 10)}.csv`);
+      }
+    }
+
+    function downloadCSV(headers, rows, filename) {
       const csvContent = "\uFEFF" + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `quiz_opinions_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -837,7 +1252,8 @@
         .replace(/'/g, "&#039;");
     }
 
-    // 初期表示
+    // 初期化実行
+    initScaleButtons();
     renderAll();
   </script>
 </body>

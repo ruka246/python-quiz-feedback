@@ -66,6 +66,48 @@
         </div>
       </section>
 
+      <!-- お知らせ欄の下：クイズ解説コーナー -->
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+          <div>
+            <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full mb-1.5">振り返り・復習</span>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800">クイズ解説</h2>
+          </div>
+          <span id="explanationUpdatedAt" class="text-xs text-slate-400"></span>
+        </div>
+
+        <p id="explanationNote" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap mb-5"></p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- 今日の解説 -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
+            <div>
+              <span class="inline-block text-[11px] font-bold bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-md mb-2">解説資料</span>
+              <h3 class="font-bold text-slate-800 text-base">今日の解説</h3>
+            </div>
+            <div id="expTodayUrlBox"></div>
+          </div>
+
+          <!-- pythonプログラム原文 -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
+            <div>
+              <span class="inline-block text-[11px] font-bold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md mb-2">Python</span>
+              <h3 class="font-bold text-slate-800 text-base">pythonプログラム原文</h3>
+            </div>
+            <div id="expPythonUrlBox"></div>
+          </div>
+
+          <!-- スクラッチプログラム原文 -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
+            <div>
+              <span class="inline-block text-[11px] font-bold bg-orange-100 text-orange-800 px-2.5 py-0.5 rounded-md mb-2">Scratch</span>
+              <h3 class="font-bold text-slate-800 text-base">スクラッチプログラム原文</h3>
+            </div>
+            <div id="expScratchUrlBox"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- ========================================== -->
       <!-- フォームA：クイズの問題リクエスト欄          -->
       <!-- ========================================== -->
@@ -351,7 +393,7 @@
             <h2 class="text-lg sm:text-xl font-black">管理ダッシュボード</h2>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 mt-1">
-            集約された「問題リクエスト」と「クイズ感想・10段階評価」の確認、およびお知らせ編集ができます。
+            集約された「問題リクエスト」と「クイズ感想・10段階評価」の確認、およびお知らせ・解説URLの編集ができます。
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
@@ -396,6 +438,65 @@
               class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold px-5 py-2 rounded-xl transition"
             >
               お知らせを更新する
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- トップページ「クイズ解説」URL・説明編集エリア -->
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-black text-slate-800 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+            トップページ「クイズ解説」URLの編集
+          </h3>
+          <span id="explanationSaveMsg" class="text-xs font-bold text-emerald-600 hidden">保存しました！</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">解説コーナーの案内文（任意）</label>
+            <textarea
+              id="editExplanationNote"
+              rows="2"
+              placeholder="例：本日のクイズの解説スライドと、使ったプログラムの原文リンクはこちらです。"
+              class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            ></textarea>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1">今日の解説 URL</label>
+              <input
+                type="url"
+                id="editTodayUrl"
+                placeholder="https://..."
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1">pythonプログラム原文 URL</label>
+              <input
+                type="url"
+                id="editPythonUrl"
+                placeholder="https://..."
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1">スクラッチプログラム原文 URL</label>
+              <input
+                type="url"
+                id="editScratchUrl"
+                placeholder="https://..."
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button
+              onclick="saveExplanation()"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold px-5 py-2 rounded-xl transition"
+            >
+              解説URLを更新する
             </button>
           </div>
         </div>
@@ -594,15 +695,25 @@
     const ADMIN_PASS = "xR8!wN4@pZ6q";
 
     // ローカルストレージキー
-    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v5";
-    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v5";
-    const STORAGE_KEY_NOTICE = "py_quiz_notice_v5";
-    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v5";
+    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v6";
+    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v6";
+    const STORAGE_KEY_NOTICE = "py_quiz_notice_v6";
+    const STORAGE_KEY_EXPLANATION = "py_quiz_explanation_v6";
+    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v6";
 
     // デフォルトのお知らせ
     const defaultNotice = {
       title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
-      body: "いつも参加ありがとうございます！\n上のフォームからは次回出してほしい問題のリクエストを、下のフォームからは今日のクイズの感想と10段階評価を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
+      body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
+      updatedAt: "2026/11/24 更新"
+    };
+
+    // デフォルトのクイズ解説データ
+    const defaultExplanation = {
+      note: "本日のクイズ解説と、使用したプログラム原文のリンクです。",
+      todayUrl: "",
+      pythonUrl: "",
+      scratchUrl: "",
       updatedAt: "2026/11/24 更新"
     };
 
@@ -709,6 +820,11 @@
       return saved ? JSON.parse(saved) : defaultNotice;
     }
 
+    function loadExplanation() {
+      const saved = localStorage.getItem(STORAGE_KEY_EXPLANATION);
+      return saved ? JSON.parse(saved) : defaultExplanation;
+    }
+
     function loadOpinions() {
       const saved = localStorage.getItem(STORAGE_KEY_OPINIONS);
       if (saved) return JSON.parse(saved);
@@ -735,6 +851,7 @@
     function renderAll() {
       renderHeader();
       renderNotice();
+      renderExplanation();
 
       const publicView = document.getElementById("publicView");
       const hostView = document.getElementById("hostView");
@@ -844,6 +961,72 @@
       renderNotice();
 
       const msg = document.getElementById("noticeSaveMsg");
+      msg.classList.remove("hidden");
+      setTimeout(() => msg.classList.add("hidden"), 2500);
+    }
+
+    // クイズ解説描画
+    function renderExplanation() {
+      const exp = loadExplanation();
+      document.getElementById("explanationNote").textContent = exp.note || "";
+      document.getElementById("explanationUpdatedAt").textContent = exp.updatedAt || "";
+
+      document.getElementById("expTodayUrlBox").innerHTML = renderUrlLinkMarkup(exp.todayUrl);
+      document.getElementById("expPythonUrlBox").innerHTML = renderUrlLinkMarkup(exp.pythonUrl);
+      document.getElementById("expScratchUrlBox").innerHTML = renderUrlLinkMarkup(exp.scratchUrl);
+
+      const editNote = document.getElementById("editExplanationNote");
+      const editToday = document.getElementById("editTodayUrl");
+      const editPython = document.getElementById("editPythonUrl");
+      const editScratch = document.getElementById("editScratchUrl");
+
+      if (editNote && editToday && editPython && editScratch) {
+        editNote.value = exp.note || "";
+        editToday.value = exp.todayUrl || "";
+        editPython.value = exp.pythonUrl || "";
+        editScratch.value = exp.scratchUrl || "";
+      }
+    }
+
+    function renderUrlLinkMarkup(rawUrl) {
+      const trimmed = (rawUrl || "").trim();
+      if (!trimmed) {
+        return `<p class="text-xs text-slate-400">url：未設定</p>`;
+      }
+      const isSafeUrl = /^https?:\/\//i.test(trimmed);
+      if (!isSafeUrl) {
+        return `<p class="text-xs text-slate-500 break-all">url：${escapeHtml(trimmed)}</p>`;
+      }
+      return `
+        <a
+          href="${escapeHtml(trimmed)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-700 hover:text-indigo-900 bg-white hover:bg-indigo-50 border border-indigo-200 px-3 py-2 rounded-lg transition break-all"
+        >
+          <span>urlを開く</span>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      `;
+    }
+
+    // クイズ解説保存
+    function saveExplanation() {
+      if (!isHostLoggedIn) return;
+      const note = document.getElementById("editExplanationNote").value.trim();
+      const todayUrl = document.getElementById("editTodayUrl").value.trim();
+      const pythonUrl = document.getElementById("editPythonUrl").value.trim();
+      const scratchUrl = document.getElementById("editScratchUrl").value.trim();
+
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} 更新`;
+      const updated = { note, todayUrl, pythonUrl, scratchUrl, updatedAt: dateStr };
+      localStorage.setItem(STORAGE_KEY_EXPLANATION, JSON.stringify(updated));
+      renderExplanation();
+
+      const msg = document.getElementById("explanationSaveMsg");
       msg.classList.remove("hidden");
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }

@@ -32,7 +32,7 @@
         </div>
         <div>
           <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">プログラミングクイズ企画 意見ボックス</h1>
-          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくる初心者向けプログラミングクイズ</p>
+          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくるプログラミングクイズ</p>
         </div>
       </div>
 
@@ -265,7 +265,7 @@
           </svg>
           <div>
             <p class="font-bold text-sm">問題リクエストを受け付けました！ありがとうございます。</p>
-            <p class="text-xs text-emerald-700 mt-0.5">スプレッドシートへ送信しました。次回クイズ作成の参考にさせていただきます。</p>
+            <p class="text-xs text-emerald-700 mt-0.5">次回クイズ作成の参考にさせていただきます。</p>
           </div>
         </div>
       </section>
@@ -375,7 +375,7 @@
           </svg>
           <div>
             <p class="font-bold text-sm">今日の感想を受け付けました！ありがとうございます。</p>
-            <p class="text-xs text-emerald-700 mt-0.5">スプレッドシートへ送信しました。みなさんの評価と感想をもとに、さらに良いクイズを作っていきます！</p>
+            <p class="text-xs text-emerald-700 mt-0.5">みなさんの評価と感想をもとに、さらに良いクイズを作っていきます！</p>
           </div>
         </div>
       </section>
@@ -395,7 +395,7 @@
             <h2 class="text-lg sm:text-xl font-black">管理ダッシュボード</h2>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 mt-1">
-            お知らせ・クイズ解説URLの編集や、このブラウザに保存された控えデータの確認・CSV出力ができます（本データはGoogle スプレッドシートにも送信されます）。
+            お知らせ・クイズ解説URLの編集や、このブラウザに保存された控えデータの確認・CSV出力ができます。
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
@@ -682,22 +682,22 @@
 
   <script>
     // ==========================================
-    // Google スプレッドシート連携用 GAS ウェブアプリ URL
+    // 送信先 GAS ウェブアプリ URL
     // ==========================================
-    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxafwsRzXK5o51EIC7NaI296KNa51djaY9p9UwoEsi_JUuHtNmBpYwm0wdO3XurVddL/exec";
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwJoKUlguWYLDsvw9UNU8n9PQhXO8a54Tz0KOmaR-AJfmf1IpMj78PEFLcwgq8jp_pv/exec";
 
     // ==========================================
-    // 管理者認証設定
+    // 管理者認証設定（SHA-256ハッシュ照合）
     // ==========================================
-    const ADMIN_ID = "k管理者";
-    const ADMIN_PASS = "xR8!wN4@pZ6q";
+    const ADMIN_ID_HASH = "1bc2b910bf01f2c3594c6f9080f1599b369006ffc601d12ab9054a9ae6cddafb";
+    const ADMIN_PASS_HASH = "2ae04139671d87a16293b55dab6766d5a1556d190c25fbece4c31cadd816904d";
 
     // ローカルストレージキー
-    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v8";
-    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v8";
-    const STORAGE_KEY_NOTICE = "py_quiz_notice_v8";
-    const STORAGE_KEY_EXPLANATION = "py_quiz_explanation_v8";
-    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v8";
+    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v10";
+    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v10";
+    const STORAGE_KEY_NOTICE = "py_quiz_notice_v10";
+    const STORAGE_KEY_EXPLANATION = "py_quiz_explanation_v10";
+    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v10";
 
     const defaultNotice = {
       title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
@@ -708,14 +708,97 @@
     const defaultExplanation = {
       note: "本日のクイズ解説と、使用したプログラム原文のリンクです。",
       todayUrl: "",
-      pythonUrl: "",
-      scratchUrl: "",
+      pythonUrl: "https://colab.research.google.com/drive/1KEfNvHGcQ6XKGh1SNSC-D18X4KGgFmn2?hl=ja",
+      scratchUrl: "https://pcratch.j-code.org/projects/1000082478/editor",
       updatedAt: "2026/11/25 更新"
     };
 
     let isHostLoggedIn = sessionStorage.getItem(STORAGE_KEY_AUTH) === "true";
     let currentTab = isHostLoggedIn ? "host" : "public";
     let adminSubTab = "requests";
+
+    function sha256Fallback(ascii) {
+      function rightRotate(value, amount) {
+        return (value >>> amount) | (value << (32 - amount));
+      }
+      const mathPow = Math.pow;
+      const maxWord = mathPow(2, 32);
+      const lengthProperty = "length";
+      let i, j;
+      let result = "";
+      const words = [];
+      const asciiBitLength = ascii[lengthProperty] * 8;
+      let hash = (sha256Fallback.h = sha256Fallback.h || []);
+      const k = (sha256Fallback.k = sha256Fallback.k || []);
+      let primeCounter = k[lengthProperty];
+      const isComposite = {};
+      for (let candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) {
+            isComposite[i] = candidate;
+          }
+          hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+          k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+        }
+      }
+      ascii += "\x80";
+      while ((ascii[lengthProperty] % 64) - 56) ascii += "\x00";
+      for (i = 0; i < ascii[lengthProperty]; i++) {
+        j = ascii.charCodeAt(i);
+        if (j >> 8) return "";
+        words[i >> 2] |= j << (((3 - i) % 4) * 8);
+      }
+      words[words[lengthProperty]] = (asciiBitLength / maxWord) | 0;
+      words[words[lengthProperty]] = asciiBitLength;
+      for (j = 0; j < words[lengthProperty]; ) {
+        const w = words.slice(j, (j += 16));
+        const oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          const w15 = w[i - 15], w2 = w[i - 2];
+          const a = hash[0], e = hash[4];
+          const temp1 =
+            hash[7] +
+            (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+            ((e & hash[5]) ^ (~e & hash[6])) +
+            k[i] +
+            (w[i] =
+              i < 16
+                ? w[i]
+                : (w[i - 16] +
+                    (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +
+                    w[i - 7] +
+                    (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |
+                  0);
+          const temp2 =
+            (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+            ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+          hash = [(temp1 + temp2) | 0].concat(hash);
+          hash[4] = (hash[4] + temp1) | 0;
+        }
+        for (i = 0; i < 8; i++) {
+          hash[i] = (hash[i] + oldHash[i]) | 0;
+        }
+      }
+      for (i = 0; i < 8; i++) {
+        for (j = 3; j + 1; j--) {
+          const b = (hash[i] >> (j * 8)) & 255;
+          result += (b < 16 ? 0 : "") + b.toString(16);
+        }
+      }
+      return result;
+    }
+
+    async function computeSha256Hex(text) {
+      const utf8Bytes = new TextEncoder().encode(text);
+      if (window.crypto && window.crypto.subtle) {
+        const hashBuffer = await window.crypto.subtle.digest("SHA-256", utf8Bytes);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+      }
+      const utf8Latin1 = Array.from(utf8Bytes, b => String.fromCharCode(b)).join("");
+      return sha256Fallback(utf8Latin1);
+    }
 
     function initScaleButtons() {
       const funContainer = document.getElementById("funScaleContainer");
@@ -775,10 +858,8 @@
       localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(list));
     }
 
-    // GAS（Google スプレッドシート）へ送信
-    async function postToGoogleSheet(payload) {
+    async function postToBackend(payload) {
       if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.startsWith("ここに")) {
-        console.warn("GAS_WEB_APP_URL が未設定のため、スプレッドシート送信はスキップされました。");
         return;
       }
       await fetch(GAS_WEB_APP_URL, {
@@ -969,7 +1050,7 @@
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }
 
-    // 問題リクエスト投稿処理（GAS送信＋ブラウザ控え保存）
+    // 問題リクエスト投稿処理
     document.getElementById("opinionForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const roleNumber = document.getElementById("reqRoleNumber").value.trim();
@@ -1002,7 +1083,7 @@
       };
 
       try {
-        await postToGoogleSheet(payload);
+        await postToBackend(payload);
 
         const newOpinion = {
           id: "op-" + Date.now(),
@@ -1027,7 +1108,7 @@
       }
     });
 
-    // クイズ感想投稿処理（GAS送信＋ブラウザ控え保存）
+    // クイズ感想投稿処理
     document.getElementById("feedbackForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const roleNumber = document.getElementById("fbRoleNumber").value.trim();
@@ -1058,7 +1139,7 @@
       };
 
       try {
-        await postToGoogleSheet(payload);
+        await postToBackend(payload);
 
         const newFeedback = {
           id: "fb-" + Date.now(),
@@ -1111,7 +1192,7 @@
       if (filtered.length === 0) {
         listEl.innerHTML = `
           <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
-            このブラウザ上の控えデータはありません（送信されたデータはGoogle スプレッドシートに記録されます）。
+            このブラウザ上の控えデータはありません。
           </div>
         `;
         return;
@@ -1224,7 +1305,7 @@
       if (feedbacks.length === 0) {
         listEl.innerHTML = `
           <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
-            このブラウザ上の感想控えはありません（送信されたデータはGoogle スプレッドシートに記録されます）。
+            このブラウザ上の感想控えはありません。
           </div>
         `;
         return;
@@ -1359,12 +1440,15 @@
       document.getElementById("loginModal").classList.add("hidden");
     }
 
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const user = document.getElementById("adminUser").value.trim();
       const pass = document.getElementById("adminPass").value;
 
-      if (user === ADMIN_ID && pass === ADMIN_PASS) {
+      const userHash = await computeSha256Hex(user);
+      const passHash = await computeSha256Hex(pass);
+
+      if (userHash === ADMIN_ID_HASH && passHash === ADMIN_PASS_HASH) {
         isHostLoggedIn = true;
         sessionStorage.setItem(STORAGE_KEY_AUTH, "true");
         currentTab = "host";

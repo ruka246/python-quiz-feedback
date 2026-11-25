@@ -32,7 +32,7 @@
         </div>
         <div>
           <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">プログラミングクイズ企画 意見ボックス</h1>
-          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくるプログラミングクイズ</p>
+          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくる初心者向けプログラミングクイズ</p>
         </div>
       </div>
 
@@ -246,6 +246,7 @@
 
           <div class="pt-1 flex items-center justify-end">
             <button
+              id="reqSubmitBtn"
               type="submit"
               class="pop-btn pop-shadow w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-xl transition flex items-center justify-center gap-2"
             >
@@ -264,7 +265,7 @@
           </svg>
           <div>
             <p class="font-bold text-sm">問題リクエストを受け付けました！ありがとうございます。</p>
-            <p class="text-xs text-emerald-700 mt-0.5">次回クイズ作成の参考にさせていただきます。</p>
+            <p class="text-xs text-emerald-700 mt-0.5">スプレッドシートへ送信しました。次回クイズ作成の参考にさせていただきます。</p>
           </div>
         </div>
       </section>
@@ -355,6 +356,7 @@
 
           <div class="pt-1 flex items-center justify-end">
             <button
+              id="fbSubmitBtn"
               type="submit"
               class="pop-btn pop-shadow w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-8 py-3 rounded-xl transition flex items-center justify-center gap-2"
             >
@@ -373,7 +375,7 @@
           </svg>
           <div>
             <p class="font-bold text-sm">今日の感想を受け付けました！ありがとうございます。</p>
-            <p class="text-xs text-emerald-700 mt-0.5">みなさんの評価と感想をもとに、さらに良いクイズを作っていきます！</p>
+            <p class="text-xs text-emerald-700 mt-0.5">スプレッドシートへ送信しました。みなさんの評価と感想をもとに、さらに良いクイズを作っていきます！</p>
           </div>
         </div>
       </section>
@@ -393,7 +395,7 @@
             <h2 class="text-lg sm:text-xl font-black">管理ダッシュボード</h2>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 mt-1">
-            集約された「問題リクエスト」と「クイズ感想・10段階評価」の確認、およびお知らせ・解説URLの編集ができます。
+            お知らせ・クイズ解説URLの編集や、このブラウザに保存された控えデータの確認・CSV出力ができます（本データはGoogle スプレッドシートにも送信されます）。
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
@@ -510,14 +512,14 @@
             onclick="setAdminSubTab('requests')"
             class="px-4 py-2.5 rounded-xl text-sm font-black transition bg-indigo-600 text-white shadow-xs"
           >
-            問題リクエスト一覧 (<span id="tabReqCount">0</span>)
+            問題リクエスト控え (<span id="tabReqCount">0</span>)
           </button>
           <button
             id="tabFeedbacksBtn"
             onclick="setAdminSubTab('feedbacks')"
             class="px-4 py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-600 border border-slate-300 hover:bg-slate-50"
           >
-            クイズ感想・評価一覧 (<span id="tabFbCount">0</span>)
+            クイズ感想控え (<span id="tabFbCount">0</span>)
           </button>
         </div>
 
@@ -533,14 +535,11 @@
         </button>
       </div>
 
-      <!-- ========================================== -->
-      <!-- 管理サブビュー1：問題リクエスト一覧        -->
-      <!-- ========================================== -->
+      <!-- 管理サブビュー1：問題リクエスト控え -->
       <div id="adminRequestsSection" class="space-y-5">
-        <!-- 集計サマリーカード -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div class="bg-white rounded-2xl border border-slate-200 p-4">
-            <p class="text-xs font-bold text-slate-400">リクエスト総数</p>
+            <p class="text-xs font-bold text-slate-400">控え総数</p>
             <p id="statTotal" class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">0</p>
           </div>
           <div class="bg-white rounded-2xl border border-slate-200 p-4">
@@ -557,7 +556,6 @@
           </div>
         </div>
 
-        <!-- 絞り込みフィルター -->
         <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
           <div class="flex flex-wrap gap-2">
             <select id="filterStatus" onchange="renderOpinions()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs sm:text-sm font-bold bg-white">
@@ -594,18 +592,14 @@
           />
         </div>
 
-        <!-- 集約された問題リクエストカード一覧 -->
         <div id="opinionList" class="space-y-4"></div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- 管理サブビュー2：クイズ感想・10段階評価一覧 -->
-      <!-- ========================================== -->
+      <!-- 管理サブビュー2：クイズ感想控え -->
       <div id="adminFeedbacksSection" class="hidden space-y-5">
-        <!-- 感想サマリー（平均スコア表示） -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <div class="bg-white rounded-2xl border border-slate-200 p-4">
-            <p class="text-xs font-bold text-slate-400">感想の回答数</p>
+            <p class="text-xs font-bold text-slate-400">感想控え数</p>
             <p id="fbStatTotal" class="text-2xl sm:text-3xl font-black text-slate-800 mt-1">0</p>
           </div>
           <div class="bg-white rounded-2xl border border-amber-200 p-4">
@@ -618,7 +612,6 @@
           </div>
         </div>
 
-        <!-- 感想カード一覧 -->
         <div id="feedbackList" class="space-y-4"></div>
       </div>
 
@@ -689,102 +682,41 @@
 
   <script>
     // ==========================================
+    // Google スプレッドシート連携用 GAS ウェブアプリ URL
+    // ==========================================
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyGHA45AEA38nV44rQQ3mDvKLbhEbpGa_jYDYQalLaaqv7sRcVzYu1ODBZ4rJs3GA52/exec";
+
+    // ==========================================
     // 管理者認証設定
     // ==========================================
     const ADMIN_ID = "k管理者";
     const ADMIN_PASS = "xR8!wN4@pZ6q";
 
     // ローカルストレージキー
-    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v7";
-    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v7";
-    const STORAGE_KEY_NOTICE = "py_quiz_notice_v7";
-    const STORAGE_KEY_EXPLANATION = "py_quiz_explanation_v7";
-    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v7";
+    const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v8";
+    const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v8";
+    const STORAGE_KEY_NOTICE = "py_quiz_notice_v8";
+    const STORAGE_KEY_EXPLANATION = "py_quiz_explanation_v8";
+    const STORAGE_KEY_AUTH = "py_quiz_host_auth_v8";
 
-    // デフォルトのお知らせ
     const defaultNotice = {
       title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
       body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
-      updatedAt: "2026/11/24 更新"
+      updatedAt: "2026/11/25 更新"
     };
 
-    // デフォルトのクイズ解説データ
     const defaultExplanation = {
       note: "本日のクイズ解説と、使用したプログラム原文のリンクです。",
       todayUrl: "",
       pythonUrl: "",
       scratchUrl: "",
-      updatedAt: "2026/11/24 更新"
+      updatedAt: "2026/11/25 更新"
     };
 
-    // 初期サンプル問題リクエストデータ
-    const defaultOpinions = [
-      {
-        id: "op-1",
-        roleNumber: "12",
-        name: "初心者A",
-        codeType: "パイソン",
-        questionType: "クイズ（4択）",
-        level: "超初心者向け",
-        text: "実行してもエラーは出ないのに、print() を書き忘れて画面に何も表示されない「初心者がハマる罠」みたいな問題があると盛り上がりそうです！",
-        status: "採用済み",
-        hostNote: "4行程度の超シンプルコードで出題予定。解説もわかりやすくする。",
-        createdAt: "2026/11/22 14:20"
-      },
-      {
-        id: "op-2",
-        roleNumber: "先生",
-        name: "担当教員",
-        codeType: "パイソン",
-        questionType: "複数選択（複数正解）",
-        level: "初級向け",
-        text: "1つのプログラム（10〜15行くらい）を見て、正しい説明をすべて選ぶ「複数選択問題」や、変数名を当てる「穴埋め問題」も取り入れてみたいです。",
-        status: "検討中",
-        hostNote: "RPGのステータス（HPや所持金）をテーマにした15行前後の複数選択問題を作成中。",
-        createdAt: "2026/11/22 18:05"
-      },
-      {
-        id: "op-3",
-        roleNumber: "27",
-        name: "スクラッチ民",
-        codeType: "スクラッチ",
-        questionType: "並び替え（パズル）",
-        level: "超初心者向け",
-        text: "スクラッチのブロックを正しい順番に並び替えて、キャラクターをゴールまで動かす問題があると楽しそうです！",
-        status: "未確認",
-        hostNote: "",
-        createdAt: "2026/11/24 11:15"
-      }
-    ];
-
-    // 初期サンプル感想データ
-    const defaultFeedbacks = [
-      {
-        id: "fb-1",
-        roleNumber: "8",
-        name: "パイソン好き",
-        funScore: 9,
-        diffScore: 6,
-        text: "制限時間がある中でコードを頭の中で動かすのがドキドキしてすごく楽しかったです！難易度はちょうど良かったです。",
-        createdAt: "2026/11/24 15:10"
-      },
-      {
-        id: "fb-2",
-        roleNumber: "先生",
-        name: "担当教員",
-        funScore: 10,
-        diffScore: 5,
-        text: "生徒たちが解説を聞いて「なるほど！」と声を上げていて、とても良い復習になっていました。",
-        createdAt: "2026/11/24 15:25"
-      }
-    ];
-
-    // 状態管理
     let isHostLoggedIn = sessionStorage.getItem(STORAGE_KEY_AUTH) === "true";
     let currentTab = isHostLoggedIn ? "host" : "public";
-    let adminSubTab = "requests"; // 'requests' or 'feedbacks'
+    let adminSubTab = "requests";
 
-    // 1〜10の評価ラジオボタンを生成
     function initScaleButtons() {
       const funContainer = document.getElementById("funScaleContainer");
       const diffContainer = document.getElementById("difficultyScaleContainer");
@@ -827,9 +759,7 @@
 
     function loadOpinions() {
       const saved = localStorage.getItem(STORAGE_KEY_OPINIONS);
-      if (saved) return JSON.parse(saved);
-      localStorage.setItem(STORAGE_KEY_OPINIONS, JSON.stringify(defaultOpinions));
-      return defaultOpinions;
+      return saved ? JSON.parse(saved) : [];
     }
 
     function saveOpinions(list) {
@@ -838,16 +768,29 @@
 
     function loadFeedbacks() {
       const saved = localStorage.getItem(STORAGE_KEY_FEEDBACKS);
-      if (saved) return JSON.parse(saved);
-      localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(defaultFeedbacks));
-      return defaultFeedbacks;
+      return saved ? JSON.parse(saved) : [];
     }
 
     function saveFeedbacks(list) {
       localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(list));
     }
 
-    // 画面描画の初期化
+    // GAS（Google スプレッドシート）へ送信
+    async function postToGoogleSheet(payload) {
+      if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.startsWith("ここに")) {
+        console.warn("GAS_WEB_APP_URL が未設定のため、スプレッドシート送信はスキップされました。");
+        return;
+      }
+      await fetch(GAS_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+    }
+
     function renderAll() {
       renderHeader();
       renderNotice();
@@ -905,7 +848,6 @@
       }
     }
 
-    // ヘッダーボタン描画
     function renderHeader() {
       const container = document.getElementById("headerActions");
       if (isHostLoggedIn) {
@@ -930,7 +872,6 @@
       }
     }
 
-    // お知らせ描画
     function renderNotice() {
       const notice = loadNotice();
       document.getElementById("noticeTitle").textContent = notice.title;
@@ -945,7 +886,6 @@
       }
     }
 
-    // お知らせ保存
     function saveNotice() {
       if (!isHostLoggedIn) return;
       const title = document.getElementById("editNoticeTitle").value.trim();
@@ -965,7 +905,6 @@
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }
 
-    // クイズ解説描画
     function renderExplanation() {
       const exp = loadExplanation();
       document.getElementById("explanationNote").textContent = exp.note || "";
@@ -1012,7 +951,6 @@
       `;
     }
 
-    // クイズ解説保存
     function saveExplanation() {
       if (!isHostLoggedIn) return;
       const note = document.getElementById("editExplanationNote").value.trim();
@@ -1031,8 +969,8 @@
       setTimeout(() => msg.classList.add("hidden"), 2500);
     }
 
-    // 問題リクエスト投稿処理
-    document.getElementById("opinionForm").addEventListener("submit", function (e) {
+    // 問題リクエスト投稿処理（GAS送信＋ブラウザ控え保存）
+    document.getElementById("opinionForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const roleNumber = document.getElementById("reqRoleNumber").value.trim();
       const name = document.getElementById("senderName").value.trim();
@@ -1046,35 +984,51 @@
         return;
       }
 
+      const btn = document.getElementById("reqSubmitBtn");
+      btn.disabled = true;
+      btn.classList.add("opacity-60");
+
       const now = new Date();
       const createdAt = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-      const newOpinion = {
-        id: "op-" + Date.now(),
+      const payload = {
+        type: "request",
         roleNumber,
         name,
         codeType,
         questionType,
         level: levelEl.value,
-        text,
-        status: "未確認",
-        hostNote: "",
-        createdAt
+        text
       };
 
-      const opinions = loadOpinions();
-      opinions.unshift(newOpinion);
-      saveOpinions(opinions);
+      try {
+        await postToGoogleSheet(payload);
 
-      document.getElementById("opinionForm").reset();
+        const newOpinion = {
+          id: "op-" + Date.now(),
+          ...payload,
+          status: "未確認",
+          hostNote: "",
+          createdAt
+        };
+        const opinions = loadOpinions();
+        opinions.unshift(newOpinion);
+        saveOpinions(opinions);
 
-      const banner = document.getElementById("submitSuccessBanner");
-      banner.classList.remove("hidden");
-      setTimeout(() => banner.classList.add("hidden"), 5000);
+        document.getElementById("opinionForm").reset();
+        const banner = document.getElementById("submitSuccessBanner");
+        banner.classList.remove("hidden");
+        setTimeout(() => banner.classList.add("hidden"), 5000);
+      } catch (err) {
+        alert("送信中にエラーが発生しました。時間をおいて再度お試しください。");
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove("opacity-60");
+      }
     });
 
-    // クイズ感想投稿処理
-    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+    // クイズ感想投稿処理（GAS送信＋ブラウザ控え保存）
+    document.getElementById("feedbackForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const roleNumber = document.getElementById("fbRoleNumber").value.trim();
       const name = document.getElementById("fbName").value.trim();
@@ -1087,31 +1041,46 @@
         return;
       }
 
+      const btn = document.getElementById("fbSubmitBtn");
+      btn.disabled = true;
+      btn.classList.add("opacity-60");
+
       const now = new Date();
       const createdAt = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-      const newFeedback = {
-        id: "fb-" + Date.now(),
+      const payload = {
+        type: "feedback",
         roleNumber,
         name,
         funScore: Number(funEl.value),
         diffScore: Number(diffEl.value),
-        text,
-        createdAt
+        text
       };
 
-      const feedbacks = loadFeedbacks();
-      feedbacks.unshift(newFeedback);
-      saveFeedbacks(feedbacks);
+      try {
+        await postToGoogleSheet(payload);
 
-      document.getElementById("feedbackForm").reset();
+        const newFeedback = {
+          id: "fb-" + Date.now(),
+          ...payload,
+          createdAt
+        };
+        const feedbacks = loadFeedbacks();
+        feedbacks.unshift(newFeedback);
+        saveFeedbacks(feedbacks);
 
-      const banner = document.getElementById("fbSuccessBanner");
-      banner.classList.remove("hidden");
-      setTimeout(() => banner.classList.add("hidden"), 5000);
+        document.getElementById("feedbackForm").reset();
+        const banner = document.getElementById("fbSuccessBanner");
+        banner.classList.remove("hidden");
+        setTimeout(() => banner.classList.add("hidden"), 5000);
+      } catch (err) {
+        alert("送信中にエラーが発生しました。時間をおいて再度お試しください。");
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove("opacity-60");
+      }
     });
 
-    // 管理画面：問題リクエスト一覧の描画
     function renderOpinions() {
       if (!isHostLoggedIn) return;
       const opinions = loadOpinions();
@@ -1142,7 +1111,7 @@
       if (filtered.length === 0) {
         listEl.innerHTML = `
           <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
-            条件に一致するリクエストはありません。
+            このブラウザ上の控えデータはありません（送信されたデータはGoogle スプレッドシートに記録されます）。
           </div>
         `;
         return;
@@ -1207,7 +1176,7 @@
                 onclick="deleteOpinion('${op.id}')"
                 class="text-xs text-rose-500 hover:text-rose-700 font-bold self-end sm:self-auto"
               >
-                このリクエストを削除
+                この控えを削除
               </button>
             </div>
 
@@ -1234,7 +1203,6 @@
       `).join("");
     }
 
-    // 管理画面：クイズ感想一覧の描画
     function renderFeedbacks() {
       if (!isHostLoggedIn) return;
       const feedbacks = loadFeedbacks();
@@ -1256,7 +1224,7 @@
       if (feedbacks.length === 0) {
         listEl.innerHTML = `
           <div class="bg-white rounded-2xl border border-slate-200 p-10 text-center text-slate-400 text-sm">
-            まだ感想は届いていません。
+            このブラウザ上の感想控えはありません（送信されたデータはGoogle スプレッドシートに記録されます）。
           </div>
         `;
         return;
@@ -1289,7 +1257,7 @@
               onclick="deleteFeedback('${fb.id}')"
               class="text-xs text-rose-500 hover:text-rose-700 font-bold"
             >
-              この感想を削除
+              この控えを削除
             </button>
           </div>
         </article>
@@ -1321,7 +1289,7 @@
 
     function deleteOpinion(id) {
       if (!isHostLoggedIn) return;
-      if (!confirm("このリクエストを完全に削除してもよろしいですか？")) return;
+      if (!confirm("この控えを削除してもよろしいですか？")) return;
       const opinions = loadOpinions().filter(o => o.id !== id);
       saveOpinions(opinions);
       renderOpinions();
@@ -1329,18 +1297,17 @@
 
     function deleteFeedback(id) {
       if (!isHostLoggedIn) return;
-      if (!confirm("この感想を完全に削除してもよろしいですか？")) return;
+      if (!confirm("この控えを削除してもよろしいですか？")) return;
       const feedbacks = loadFeedbacks().filter(f => f.id !== id);
       saveFeedbacks(feedbacks);
       renderFeedbacks();
     }
 
-    // CSV出力（現在開いているサブタブに応じて出力）
     function handleExportCSV() {
       if (!isHostLoggedIn) return;
       if (adminSubTab === "requests") {
         const opinions = loadOpinions();
-        const headers = ["ID", "投稿日時", "先生/生徒番号", "ニックネーム", "コードの種類", "問題の種類", "レベル感", "ステータス", "リクエスト内容", "メモ"];
+        const headers = ["ID", "投稿日時", "先生/番号", "ニックネーム", "コードの種類", "問題の種類", "レベル感", "ステータス", "リクエスト内容", "メモ"];
         const rows = opinions.map(o => [
           o.id,
           o.createdAt,
@@ -1356,7 +1323,7 @@
         downloadCSV(headers, rows, `quiz_requests_${new Date().toISOString().slice(0, 10)}.csv`);
       } else {
         const feedbacks = loadFeedbacks();
-        const headers = ["ID", "投稿日時", "先生/生徒番号", "ニックネーム", "楽しさ(10段階)", "難しさ(10段階)", "感想内容"];
+        const headers = ["ID", "投稿日時", "先生/番号", "ニックネーム", "楽しさ(10段階)", "難しさ(10段階)", "感想内容"];
         const rows = feedbacks.map(f => [
           f.id,
           f.createdAt,
@@ -1381,7 +1348,6 @@
       URL.revokeObjectURL(url);
     }
 
-    // ログインモーダル制御
     function openLoginModal() {
       document.getElementById("loginError").classList.add("hidden");
       document.getElementById("adminUser").value = "";
@@ -1435,7 +1401,6 @@
         .replace(/'/g, "&#039;");
     }
 
-    // 初期化実行
     initScaleButtons();
     renderAll();
   </script>

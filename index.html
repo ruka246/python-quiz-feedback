@@ -23,9 +23,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-
-  
- 
+  <!-- ヘッダー -->
   <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-30">
     <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -34,22 +32,24 @@
         </div>
         <div>
           <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">プログラミングクイズ企画 意見ボックス</h1>
-          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくるプログラミングクイズ</p>
+          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくる初心者向けプログラミングクイズ</p>
         </div>
       </div>
 
-     
+      <!-- ログイン済みのときだけ管理用ナビゲーションを表示 -->
       <div id="headerActions" class="flex items-center gap-2"></div>
     </div>
   </header>
 
- 
+  <!-- メインコンテンツ -->
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-8">
 
-    
+    <!-- ========================================== -->
+    <!-- 1. トップページ（一般参加者・全員閲覧可能） -->
+    <!-- ========================================== -->
     <div id="publicView" class="space-y-8">
 
-      
+      <!-- ホスト（管理者）からのお知らせボード -->
       <section class="bg-white rounded-2xl border-2 border-indigo-200 shadow-sm overflow-hidden">
         <div class="bg-indigo-600 px-5 py-3 flex items-center justify-between">
           <div class="flex items-center gap-2 text-white font-bold">
@@ -66,7 +66,7 @@
         </div>
       </section>
 
-      
+      <!-- お知らせ欄の下：クイズ解説コーナー -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
           <div>
@@ -79,7 +79,7 @@
         <p id="explanationNote" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap mb-5"></p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-         
+          <!-- 今日の解説 -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
             <div>
               <span class="inline-block text-[11px] font-bold bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-md mb-2">解説資料</span>
@@ -88,7 +88,7 @@
             <div id="expTodayUrlBox"></div>
           </div>
 
-         
+          <!-- pythonプログラム原文 -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
             <div>
               <span class="inline-block text-[11px] font-bold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md mb-2">Python</span>
@@ -97,7 +97,7 @@
             <div id="expPythonUrlBox"></div>
           </div>
 
-        
+          <!-- スクラッチプログラム原文 -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between gap-3">
             <div>
               <span class="inline-block text-[11px] font-bold bg-orange-100 text-orange-800 px-2.5 py-0.5 rounded-md mb-2">Scratch</span>
@@ -108,7 +108,9 @@
         </div>
       </section>
 
-     
+      <!-- ========================================== -->
+      <!-- フォームA：クイズの問題リクエスト欄          -->
+      <!-- ========================================== -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
         <div class="mb-6">
           <div class="flex items-center gap-2 mb-2">
@@ -123,7 +125,7 @@
 
         <form id="opinionForm" class="space-y-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          
+            <!-- 先生・生徒番号（必須） -->
             <div>
               <label for="reqRoleNumber" class="block text-sm font-bold text-slate-700 mb-1.5">
                 先生の場合は先生と書き生徒の場合は番号を書いてください <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -138,7 +140,7 @@
               />
             </div>
 
-           
+            <!-- ニックネーム（必須） -->
             <div>
               <label for="senderName" class="block text-sm font-bold text-slate-700 mb-1.5">
                 ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -155,7 +157,7 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
+            <!-- コードの種類（必須：スクラッチ・パイソン・その他） -->
             <div>
               <label for="codeType" class="block text-sm font-bold text-slate-700 mb-1.5">
                 コードの種類 <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -172,7 +174,7 @@
               </select>
             </div>
 
-            
+            <!-- 問題の種類（必須：すべての問題の種類） -->
             <div>
               <label for="questionType" class="block text-sm font-bold text-slate-700 mb-1.5">
                 問題の種類 <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -195,7 +197,7 @@
             </div>
           </div>
 
-     
+          <!-- 希望するレベル感（必須） -->
           <div>
             <label class="block text-sm font-bold text-slate-700 mb-2">
               想定してほしいレベル感 <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -228,7 +230,7 @@
             </div>
           </div>
 
-         
+          <!-- リクエスト本文（必須） -->
           <div>
             <label for="opinionText" class="block text-sm font-bold text-slate-700 mb-1.5">
               リクエスト・アイデアの内容 <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -256,7 +258,7 @@
           </div>
         </form>
 
-       
+        <!-- リクエスト送信完了メッセージ -->
         <div id="submitSuccessBanner" class="hidden mt-5 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xl p-4 flex items-start gap-3">
           <svg class="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -268,7 +270,9 @@
         </div>
       </section>
 
-
+      <!-- ========================================== -->
+      <!-- フォームB：クイズ感想欄（10段階評価付き）  -->
+      <!-- ========================================== -->
       <section class="bg-white rounded-2xl border-2 border-amber-200 shadow-sm p-5 sm:p-7">
         <div class="mb-6">
           <div class="flex items-center gap-2 mb-2">
@@ -283,7 +287,7 @@
 
         <form id="feedbackForm" class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
+            <!-- 先生・生徒番号（必須） -->
             <div>
               <label for="fbRoleNumber" class="block text-sm font-bold text-slate-700 mb-1.5">
                 先生の場合は先生と書き生徒の場合は番号を書いてください <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -298,7 +302,7 @@
               />
             </div>
 
-            
+            <!-- ニックネーム（必須） -->
             <div>
               <label for="fbName" class="block text-sm font-bold text-slate-700 mb-1.5">
                 ニックネーム <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -314,7 +318,7 @@
             </div>
           </div>
 
-       
+          <!-- 今日の楽しさ 10段階評価（必須） -->
           <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-4">
             <div class="flex flex-wrap items-center justify-between gap-1 mb-2.5">
               <label class="text-sm font-bold text-slate-800">
@@ -325,7 +329,7 @@
             <div id="funScaleContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
           </div>
 
-         
+          <!-- 今日の難しさ 10段階評価（必須） -->
           <div class="bg-sky-50/60 border border-sky-200/80 rounded-2xl p-4">
             <div class="flex flex-wrap items-center justify-between gap-1 mb-2.5">
               <label class="text-sm font-bold text-slate-800">
@@ -336,7 +340,7 @@
             <div id="difficultyScaleContainer" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
           </div>
 
-         
+          <!-- 感想入力欄（必須） -->
           <div>
             <label for="fbText" class="block text-sm font-bold text-slate-700 mb-1.5">
               今日のクイズの感想 <span class="text-rose-500 text-xs font-bold">（必須）</span>
@@ -364,7 +368,7 @@
           </div>
         </form>
 
-       
+        <!-- 感想送信完了メッセージ -->
         <div id="fbSuccessBanner" class="hidden mt-5 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xl p-4 flex items-start gap-3">
           <svg class="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -378,10 +382,12 @@
 
     </div>
 
-   
+    <!-- ========================================================== -->
+    <!-- 2. ホスト（管理者）専用ダッシュボード（ログイン時のみ表示） -->
+    <!-- ========================================================== -->
     <div id="hostView" class="hidden space-y-6">
 
-     
+      <!-- 管理者モードバナー -->
       <div class="bg-slate-900 text-white rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-md">
         <div>
           <div class="flex items-center gap-2">
@@ -402,7 +408,7 @@
         </div>
       </div>
 
-      
+      <!-- トップページ「お知らせ」編集エリア -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-black text-slate-800 flex items-center gap-2">
@@ -439,7 +445,7 @@
         </div>
       </section>
 
-     
+      <!-- トップページ「クイズ解説」URL・説明編集エリア -->
       <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-black text-slate-800 flex items-center gap-2">
@@ -498,7 +504,7 @@
         </div>
       </section>
 
-      
+      <!-- 管理タブ切り替え（問題リクエスト vs クイズ感想） -->
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-300 pb-3">
         <div class="flex gap-2">
           <button
@@ -529,7 +535,7 @@
         </button>
       </div>
 
-      
+      <!-- 管理サブビュー1：問題リクエスト控え -->
       <div id="adminRequestsSection" class="space-y-5">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div class="bg-white rounded-2xl border border-slate-200 p-4">
@@ -589,7 +595,7 @@
         <div id="opinionList" class="space-y-4"></div>
       </div>
 
-     
+      <!-- 管理サブビュー2：クイズ感想控え -->
       <div id="adminFeedbacksSection" class="hidden space-y-5">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <div class="bg-white rounded-2xl border border-slate-200 p-4">
@@ -612,7 +618,7 @@
     </div>
   </main>
 
-  
+  <!-- フッター（目立たない白い文字リンクのログイン配置） -->
   <footer class="bg-slate-800 text-slate-300 mt-12 py-5 px-4">
     <div class="max-w-5xl mx-auto flex items-center justify-between text-xs">
       <span>プログラミングクイズ企画 意見集約サイト &copy; 2026</span>
@@ -626,7 +632,9 @@
     </div>
   </footer>
 
-  
+  <!-- ========================================== -->
+  <!-- シンプルなログインモーダル                 -->
+  <!-- ========================================== -->
   <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-5">
       <div class="flex items-center justify-between">
@@ -673,10 +681,14 @@
   </div>
 
   <script>
-    
-    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzRj5bNUF4feabxMFEJ3p_vEAQg8UJOGklOnyH9-jubdvb-fYMeqjnvEzB2l9umORbx/exec";
+    // ==========================================
+    // 送信先 GAS ウェブアプリ URL
+    // ==========================================
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyGHA45AEA38nV44rQQ3mDvKLbhEbpGa_jYDYQalLaaqv7sRcVzYu1ODBZ4rJs3GA52/exec";
 
-    
+    // ==========================================
+    // 管理者認証設定（SHA-256ハッシュ照合）
+    // ==========================================
     const ADMIN_ID_HASH = "1bc2b910bf01f2c3594c6f9080f1599b369006ffc601d12ab9054a9ae6cddafb";
     const ADMIN_PASS_HASH = "2ae04139671d87a16293b55dab6766d5a1556d190c25fbece4c31cadd816904d";
 
@@ -689,7 +701,7 @@
 
     const defaultNotice = {
       title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
-      body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n今日(11月28日)はクラシックですが次回は復習としてロボットランをやります。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
+      body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
       updatedAt: "2026/11/25 更新"
     };
 
@@ -1272,8 +1284,6 @@
       `).join("");
     }
 
-
-    
     function renderFeedbacks() {
       if (!isHostLoggedIn) return;
       const feedbacks = loadFeedbacks();

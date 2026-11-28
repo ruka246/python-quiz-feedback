@@ -32,7 +32,7 @@
         </div>
         <div>
           <h1 class="font-black text-lg sm:text-xl tracking-tight leading-tight">プログラミングクイズ企画 意見ボックス</h1>
-          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくる初心者向けプログラミングクイズ</p>
+          <p class="text-xs text-indigo-200 hidden sm:block">みんなでつくるプログラミングクイズ</p>
         </div>
       </div>
 
@@ -681,18 +681,13 @@
   </div>
 
   <script>
-    // ==========================================
-    // 送信先 GAS ウェブアプリ URL
-    // ==========================================
+    
     const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyGHA45AEA38nV44rQQ3mDvKLbhEbpGa_jYDYQalLaaqv7sRcVzYu1ODBZ4rJs3GA52/exec";
 
-    // ==========================================
-    // 管理者認証設定（SHA-256ハッシュ照合）
-    // ==========================================
+
     const ADMIN_ID_HASH = "1bc2b910bf01f2c3594c6f9080f1599b369006ffc601d12ab9054a9ae6cddafb";
     const ADMIN_PASS_HASH = "2ae04139671d87a16293b55dab6766d5a1556d190c25fbece4c31cadd816904d";
 
-    // ローカルストレージキー
     const STORAGE_KEY_OPINIONS = "py_quiz_opinions_v10";
     const STORAGE_KEY_FEEDBACKS = "py_quiz_feedbacks_v10";
     const STORAGE_KEY_NOTICE = "py_quiz_notice_v10";
@@ -701,7 +696,7 @@
 
     const defaultNotice = {
       title: "プログラミングクイズの問題リクエスト＆今日の感想を募集中です！",
-      body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
+      body: "いつも参加ありがとうございます！\n上の解説欄から振り返りができ、下のフォームからは次回出してほしい問題のリクエストや今日のクイズの感想（10段階評価）を送ることができます。\n今日はクラシックをやりましたが次回は復習としてロボットランをやろうと思っています。\n先生は「先生」、生徒は自分の出席番号（または番号）を入力して送信してください！",
       updatedAt: "2026/11/25 更新"
     };
 
